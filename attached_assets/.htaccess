@@ -1,0 +1,18 @@
+# Enable URL rewriting
+RewriteEngine On
+
+# Set base directory
+RewriteBase /
+
+# If the request is for a real file or directory, do nothing
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# If the request is for an API endpoint, serve the corresponding JSON file
+RewriteRule ^api/products/featured$ api/featured-products.json [L]
+RewriteRule ^api/products$ api/products.json [L]
+RewriteRule ^api/categories$ api/categories.json [L]
+
+# For everything else, serve the index.html
+RewriteRule ^ index.html [L]
