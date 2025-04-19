@@ -3,78 +3,91 @@ import react from "@vitejs/plugin-react";
 import themePlugin from "@replit/vite-plugin-shadcn-theme-json";
 import path from "path";
 
-// Get current directory using Node.js standard
-const rootDir = path.resolve(__dirname);
-const clientDir = path.join(rootDir, "client");
-const sharedDir = path.join(rootDir, "shared");
-const assetsDir = path.join(rootDir, "attached_assets");
+// Validate environment variables before loading config
+if (!process.env.VITE_API_BASE_URL) {
+  throw new Error('Missing VITE_API_BASE_URL environment variable');
+}
+
+// Path configuration
+const PROJECT_ROOT = path.resolve(__dirname, '..'); // Move up from client directory
+const CLIENT_SRC = path.join(PROJECT_ROOT, 'client/src');
+const SHARED_DIR = path.join(PROJECT_ROOT, 'shared');
+const ASSETS_DIR = path.join(PROJECT_ROOT, 'attached_assets');
 
 export default defineConfig({
   plugins: [
-    react(),
+    react({
+      jsxImportSource: '@emotion/react',
+      babel: {
+        plugins: ['@emotion/babel-plugin'],
+      },
+    }),
     themePlugin({
-      // Add theme plugin configuration if needed
+      themePath: path.join(CLIENT_SRC, 'theme.json'),
     }),
   ],
-  // Use proper environment variable handling
-  envDir: rootDir,
-  envPrefix: "VITE_",
-  
+
+  // Environment configuration
+  envDir: PROJECT_ROOT,
+  envPrefix: 'VITE_',
+
+  // Path resolution
   resolve: {
     alias: {
-      "@": path.join(clientDir, "src"),
-      "@shared": sharedDir,
-      "@assets": assetsDir,
-      // Add any other necessary aliases
+      '@': CLIENT_SRC,
+      '@shared': SHARED_DIR,
+      '@assets': ASSETS_DIR,
+      '@server': path.join(PROJECT_ROOT, 'server'),
     },
   },
-  
-  // Explicit base path for deployment
-  base: process.env.NODE_ENV === "production" ? "/" : "/",
-  
+
+  // Build configuration
   build: {
-    outDir: path.join(rootDir, "dist/public"),
+    outDir: path.join(PROJECT_ROOT, 'dist/public'),
     emptyOutDir: true,
-    sourcemap: process.env.NODE_ENV !== "production",
+    sourcemap: process.env.NODE_ENV === 'development',
     
-    // Improved optimization
-    minify: "terser",
+    // Optimization settings
+    minify: 'terser',
     terserOptions: {
       compress: {
         drop_console: true,
         drop_debugger: true,
+        pure_funcs: ['console.info', 'console.debug'],
       },
       format: {
         comments: false,
       },
     },
 
-    // Better chunking strategy
+    // Advanced chunking
     rollupOptions: {
       output: {
         manualChunks(id) {
-          if (id.includes("node_modules")) {
-            if (id.includes("@radix-ui")) return "vendor-radix";
-            if (id.includes("react")) return "vendor-react";
-            return "vendor";
+          if (id.includes('node_modules')) {
+            if (id.includes('@radix-ui')) return 'radix';
+            if (id.includes('react')) return 'react-vendor';
+            if (id.includes('lodash')) return 'lodash';
+            return 'vendor';
           }
         },
-        chunkFileNames: "assets/[name]-[hash].js",
-        assetFileNames: "assets/[name]-[hash][extname]",
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/chunks/[name]-[hash].js',
+        assetFileNames: 'assets/media/[name]-[hash][extname]',
       },
     },
   },
 
-  // Server configuration for development
+  // Development server
   server: {
     port: 3000,
     strictPort: true,
-    open: true,
+    open: '/setup',
     proxy: {
-      "/api": {
-        target: "http://localhost:5000",
+      '/api': {
+        target: 'http://localhost:5000',
         changeOrigin: true,
-        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
   },
@@ -83,5 +96,11 @@ export default defineConfig({
   preview: {
     port: 3000,
     strictPort: true,
+    proxy: {
+      '/api': {
+        target: process.env.VITE_API_BASE_URL,
+        changeOrigin: true,
+      },
+    },
   },
 });
