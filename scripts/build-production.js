@@ -31,7 +31,7 @@ if (fs.existsSync(envProdPath)) {
 try {
   // Build frontend with production config
   console.log('📦 Building frontend...');
-  execSync('vite build --config vite.config.prod.ts', { stdio: 'inherit' });
+  execSync('cd client && npm run build', { stdio: 'inherit' });
   
   // Build backend
   console.log('📦 Building backend...');
