@@ -1,0 +1,10 @@
+{
+    "name": "client",
+    "scripts": {
+      "build": "vite build --config vite.config.prod.ts"
+    },
+    "devDependencies": {
+      "vite": "^5.4.14",
+      "@vitejs/plugin-react": "^4.3.2"
+    }
+  }
