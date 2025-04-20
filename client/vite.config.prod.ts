@@ -16,16 +16,8 @@ const ASSETS_DIR = path.join(PROJECT_ROOT, 'attached_assets');
 
 export default defineConfig({
   plugins: [
-    react({
-      jsxImportSource: '@emotion/react',
-      babel: {
-        plugins: ['@emotion/babel-plugin'],
-      },
-    }),
-    themePlugin({
-      // Directly specify the theme file path (no nested "config" object)
-      theme: path.join(CLIENT_SRC, 'theme.json'),
-    }),
+    react({/* ... */}),
+    // Remove themePlugin
   ],
 
   // Environment configuration
