@@ -2,13 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Additional custom styles */
-
-/* Product Card Animations */
+/* ========== Animations ========== */
 @keyframes shine {
-  to {
-    transform: translateX(250%);
-  }
+  to { transform: translateX(250%); }
 }
 
 @keyframes wiggle {
@@ -18,17 +14,11 @@
 }
 
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Background patterns for product cards */
+/* ========== Utility Classes ========== */
 .bg-radial-gradient {
   background: radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, transparent 70%);
 }
@@ -40,275 +30,74 @@
   background-size: 20px 20px;
 }
 
-/* Apply card entry animation when visible */
-.card-entry-animation {
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.card-visible {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-}
-
-/* Shine animation for buttons */
-.animate-shine {
-  animation: shine 1.5s infinite;
-}
-
-/* Wiggle animation for cart icon */
-.animate-wiggle {
-  animation: wiggle 1s ease-in-out;
-}
-
-/* Quick animations for product elements */
 .scale-on-hover {
-  transition: transform 0.3s ease;
+  @apply transition-transform duration-300 ease-in-out;
+  &:hover { @apply scale-105; }
 }
 
-.scale-on-hover:hover {
-  transform: scale(1.05);
-}
-
-/* Quick button animation */
 .button-pop {
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  @apply transition-transform duration-200 ease-[cubic-bezier(0.175,0.885,0.32,1.275)];
+  &:active { @apply scale-95; }
 }
 
-.button-pop:active {
-  transform: scale(0.95);
-}
-
-/* Product description styles for rich text content */
-.product-description img {
-  max-width: 100%;
-  height: auto;
-  margin: 1rem 0;
-  border-radius: 0.375rem;
-}
-
-/* Image alignment classes from Quill editor */
-.product-description .ql-align-left {
-  text-align: left;
-}
-
-.product-description .ql-align-center {
-  text-align: center;
-}
-
-.product-description .ql-align-right {
-  text-align: right;
-}
-
-/* Ensure centered images are properly centered */
-.product-description .ql-align-center img {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-}
-
-.product-description p {
-  margin-bottom: 1rem;
-}
-
-.product-description h1, 
-.product-description h2, 
-.product-description h3, 
-.product-description h4 {
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
-  font-weight: 600;
-}
-
-.product-description ul, 
-.product-description ol {
-  padding-left: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.product-description ul {
-  list-style-type: disc;
-}
-
-.product-description ol {
-  list-style-type: decimal;
-}
-
-.product-description a {
-  color: #3b82f6;
-  text-decoration: underline;
-}
-
-/* React Quill Editor Auto-Expanding styles */
-.quill {
-  display: flex;
-  flex-direction: column;
-}
-
-.quill .ql-container {
-  flex: 1;
-  overflow: auto;
-  min-height: 200px;
-  max-height: none;
-  height: auto !important;
-}
-
-.quill .ql-editor {
-  min-height: 200px;
-  height: auto !important;
-  max-height: none;
-  overflow: visible;
-}
-
-/* Image resize module styles */
-.quill-container {
-  position: relative;
-}
-
-.image-resize-overlay {
-  position: absolute;
-  box-sizing: border-box;
-  border: 1px dashed #3b82f6;
-  pointer-events: none;
-}
-
-.image-resize-handle {
-  position: absolute;
-  height: 12px;
-  width: 12px;
-  background-color: white;
-  border: 1px solid #3b82f6;
-  pointer-events: all;
-  z-index: 2;
-}
-
-.image-resize-dimension-display {
-  position: absolute;
-  top: -24px;
-  left: 0;
-  background-color: #3b82f6;
-  color: white;
-  font-size: 12px;
-  padding: 2px 6px;
-  border-radius: 3px;
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* Image styles within editor */
-.quill .ql-editor img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 1rem auto;
-}
-
-/* Direct image alignment when selected in editor */
-.quill .ql-editor .ql-align-center img,
-.quill .ql-editor img.ql-align-center {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.quill .ql-editor .ql-align-right img,
-.quill .ql-editor img.ql-align-right {
-  margin-left: auto;
-  margin-right: 0;
-}
-
-.quill .ql-editor .ql-align-left img,
-.quill .ql-editor img.ql-align-left {
-  margin-left: 0;
-  margin-right: auto;
-}
-
-/* Quill image alignment with ql-align classes */
-.quill .ql-editor p.ql-align-center img {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.quill .ql-editor p.ql-align-right img {
-  margin-left: auto;
-  margin-right: 0;
-}
-
-.quill .ql-editor p.ql-align-left img {
-  margin-left: 0;
-  margin-right: auto;
-}
-
-/* Make sure the image itself is block level so margins work properly */
-.quill .ql-editor p.ql-align-center, 
-.quill .ql-editor p.ql-align-right, 
-.quill .ql-editor p.ql-align-left {
-  display: block;
-  width: 100%;
-}
-
-/* Additional Quill Editor Styles for proper image handling */
-.quill .ql-editor .ql-align-center {
-  text-align: center;
-}
-
-.quill .ql-editor .ql-align-right {
-  text-align: right;
-}
-
-.quill .ql-editor .ql-align-left {
-  text-align: left;
-}
-
-/* Add more styling as needed */
-
-/* Ensure proper grid layout for description images in product detail */
-#product-content .grid {
-  display: grid;
-  justify-items: center;
-}
-
-/* Style each image container in the product description */
-#product-content .grid > div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-/* Ensure the images themselves are properly centered */
-#product-content .grid > div img {
-  display: block;
-  max-width: 100%;
-  margin: 0 auto;
-  object-fit: contain;
-}
-
-/* Media query for web view */
-@media (min-width: 640px) {
-  #product-content .grid > div {
-    max-width: calc(100% - 1rem);
-    margin: 0 auto;
+/* ========== Component Styles ========== */
+/* Product Cards */
+.card-entry-animation {
+  @apply transition-opacity duration-600 ease-in-out transition-transform duration-600 ease-in-out;
+  
+  &.card-visible {
+    @apply opacity-100 translate-y-0;
   }
 }
 
+/* Quill Editor */
+.quill {
+  @apply flex flex-col;
+  
+  .ql-container {
+    @apply flex-1 overflow-auto min-h-[200px] h-auto;
+  }
+  
+  .ql-editor {
+    @apply min-h-[200px] h-auto overflow-visible;
+    
+    img {
+      @apply max-w-full h-auto my-4 rounded-md;
+    }
+    
+    p { @apply mb-4; }
+    h1, h2, h3, h4 { @apply mt-6 mb-4 font-semibold; }
+    ul, ol { @apply pl-6 mb-4; }
+    ul { @apply list-disc; }
+    ol { @apply list-decimal; }
+    a { @apply text-blue-500 underline; }
+  }
+}
+
+/* Image Resize Handler */
+.image-resize-overlay {
+  @apply absolute box-border border-dashed border-blue-500 pointer-events-none;
+}
+
+.image-resize-handle {
+  @apply absolute h-3 w-3 bg-white border border-blue-500 pointer-events-auto z-10;
+}
+
+/* ========== Base Layer Styles ========== */
 @layer base {
   :root {
     --green-primary: 120 30% 30%;
     --green-dark: 120 35% 25%;
     --yellow-accent: 48 100% 50%;
-  }
-
-  * {
-    @apply border-border;
+    --border: 214.3 31.8% 91.4%; /* Added missing border variable */
   }
 
   html, body {
-    width: 100%;
-    scroll-behavior: smooth;
+    @apply w-full scroll-smooth;
   }
 
   body {
-    @apply font-sans antialiased bg-white text-gray-800;
-    position: relative;
+    @apply font-sans antialiased bg-white text-gray-800 relative;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -319,7 +108,38 @@
     @apply transition-colors duration-200;
   }
 
-  /* Custom button styles to match the site */
+  section[id] {
+    scroll-margin-top: 80px;
+    
+    @media (max-width: 767px) {
+      scroll-margin-top: 60px;
+    }
+  }
+
+  /* Scrollbar Management */
+  @media (max-width: 767px) {
+    body {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      
+      &::-webkit-scrollbar {
+        @apply hidden;
+      }
+    }
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    
+    &::-webkit-scrollbar {
+      @apply hidden;
+    }
+  }
+}
+
+/* ========== Custom Components ========== */
+@layer components {
   .btn-primary {
     @apply bg-green-700 hover:bg-green-800 text-white rounded px-4 py-2 transition-colors;
   }
@@ -327,49 +147,11 @@
   .btn-outline {
     @apply border border-green-700 text-green-700 hover:bg-green-50 rounded px-4 py-2 transition-colors;
   }
-  
-  /* Section offset for scroll anchors to account for fixed header */
-  section[id] {
-    scroll-margin-top: 80px;
-  }
+}
 
-  /* Hide scrollbar on mobile devices only */
-  @media (max-width: 767px) {
-    body {
-      scrollbar-width: none; /* Firefox */
-      -ms-overflow-style: none; /* IE and Edge */
-    }
-    body::-webkit-scrollbar {
-      display: none; /* Chrome, Safari, Opera */
-    }
-    
-    /* Smaller offset for mobile */
-    section[id] {
-      scroll-margin-top: 60px;
-    }
-  }
-
-  /* Hide scrollbars but maintain scrolling functionality */
-  .hide-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;     /* Firefox */
-  }
-  
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;             /* Chrome, Safari, Opera */
-  }
-  
-  /* Product page specific styles */
-  .product-image-zoom {
-    transition: transform 0.3s ease;
-  }
-  
-  .product-image-zoom:hover {
-    transform: scale(1.05);
-  }
-  
-  /* Custom styles for the switch in RTL mode */
-  .rtl-switch[data-state="checked"] {
-    background-color: #4d7c4d !important;
+/* ========== Responsive Styles ========== */
+@media (min-width: 640px) {
+  #product-content .grid > div {
+    @apply max-w-[calc(100%-1rem)] mx-auto;
   }
 }
