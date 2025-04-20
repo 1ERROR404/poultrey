@@ -23,7 +23,7 @@ export default defineConfig({
       },
     }),
     themePlugin({
-      themePath: path.join(CLIENT_SRC, 'theme.json'),
+      themePath: path.join(__dirname, 'src/theme.json'), // Fixed path (relative to config file)
     }),
   ],
 
