@@ -8,13 +8,8 @@ import { fileURLToPath } from "node:url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Validate environment variables before loading config
-if (!process.env.VITE_API_BASE_URL) {
-  throw new Error('Missing VITE_API_BASE_URL environment variable');
-}
-
 // Path configuration
-const PROJECT_ROOT = path.resolve(__dirname, '..'); // Move up from client directory
+const PROJECT_ROOT = path.resolve(__dirname, '..');
 const CLIENT_SRC = path.join(PROJECT_ROOT, 'client/src');
 const SHARED_DIR = path.join(PROJECT_ROOT, 'shared');
 const ASSETS_DIR = path.join(PROJECT_ROOT, 'attached_assets');
@@ -42,7 +37,7 @@ export default defineConfig({
       '@': CLIENT_SRC,
       '@shared': SHARED_DIR,
       '@assets': ASSETS_DIR,
-      '@server': path.join(PROJECT_ROOT, 'server'),
+      // Remove @server alias if not needed
     },
   },
 
@@ -88,24 +83,13 @@ export default defineConfig({
     port: 3000,
     strictPort: true,
     open: '/setup',
-    proxy: {
-      '/api': {
-        target: 'http://localhost:5000',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
-    },
+    // Remove proxy if not needed
   },
 
   // Preview configuration
   preview: {
     port: 3000,
     strictPort: true,
-    proxy: {
-      '/api': {
-        target: process.env.VITE_API_BASE_URL,
-        changeOrigin: true,
-      },
-    },
+    // Remove proxy if not needed
   },
 });
