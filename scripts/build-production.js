@@ -34,11 +34,11 @@ try {
   execSync('cd client && npm run build', { stdio: 'inherit' });
   
   // Build backend
-  console.log('📦 Building backend...');
-  execSync('esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist', { stdio: 'inherit' });
+ // console.log('📦 Building backend...');
+  //execSync('esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist', { stdio: 'inherit' });
   
   // Copy necessary files for production
-  console.log('📂 Copying assets...');
+ // console.log('📂 Copying assets...');
   
   // Copy public uploads
   if (fs.existsSync(path.join(process.cwd(), 'public', 'uploads'))) {
