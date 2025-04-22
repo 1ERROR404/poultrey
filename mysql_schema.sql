@@ -48,39 +48,35 @@ CREATE TABLE IF NOT EXISTS `products` (
   `sku` VARCHAR(255),
   `weight` VARCHAR(255),
   `dimensions` VARCHAR(255),
-  `warrantyinfo` TEXT,
+  `warrantyInfo` TEXT,  -- Corrected typo
   `features` TEXT,
   `specs` TEXT,
   `tags` TEXT,
   `quantity` INT,
-  `metatitle` TEXT,
-  `metadescription` TEXT,
-  `additionalimages` TEXT,
-  `videourl` TEXT,
-  `specificationimages` TEXT,
-  `descriptionimages` TEXT,
-  `keyfeatures` VARCHAR(255),
-  `keybenefits` VARCHAR(255),
-  `usecasecommercial` VARCHAR(255),
-  `usecasebackyard` VARCHAR(255),
-  `maintenancetips` VARCHAR(255),
-  `keyfeaturesar` VARCHAR(255),
-  `keybenefitsar` VARCHAR(255),
-  `usecasecommercialar` VARCHAR(255),
-  `usecasebackyardar` VARCHAR(255),
-  `maintenancetipsar` VARCHAR(255),
-  `keyfeaturestitle` VARCHAR(255),
-  `usecasecommercialtitle` VARCHAR(255),
-  `usecasebackyardtitle` VARCHAR(255),
-  `maintenancetipstitle` VARCHAR(255),
-  `keyfeaturestitlear` VARCHAR(255),
-  `keybenefitstitlear` VARCHAR(255),
-  `maintenancetipstitlear` VARCHAR(255),
-  `keybenefitstitle` VARCHAR(255),
-  `usecasecommercialtitlear` VARCHAR(255),
-  `usecasebackyardtitlear` VARCHAR(255),
-  `usecasestitle` VARCHAR(255),
-  `usecasestitlear` VARCHAR(255),
+  `metaTitle` TEXT,  -- Corrected typo
+  `metaDescription` TEXT, -- Corrected typo
+  `keyFeatures` VARCHAR(255),
+  `keyBenefits` VARCHAR(255),
+  `useCaseCommercial` VARCHAR(255), -- Corrected typo
+  `useCaseBackyard` VARCHAR(255),  -- Corrected typo
+  `maintenanceTips` VARCHAR(255), -- Corrected typo
+  `keyFeaturesAr` VARCHAR(255),
+  `keyBenefitsAr` VARCHAR(255),
+  `useCaseCommercialAr` VARCHAR(255), -- Corrected typo
+  `useCaseBackyardAr` VARCHAR(255),  -- Corrected typo
+  `maintenanceTipsAr` VARCHAR(255), -- Corrected typo
+  `keyFeaturesTitle` VARCHAR(255),
+  `useCaseCommercialTitle` VARCHAR(255), -- Corrected typo
+  `useCaseBackyardTitle` VARCHAR(255),  -- Corrected typo
+  `maintenanceTipTitle` VARCHAR(255),  -- Corrected typo
+  `keyFeaturesTitleAr` VARCHAR(255),
+  `keyBenefitsTitleAr` VARCHAR(255),
+  `maintenanceTipTitleAr` VARCHAR(255),  -- Corrected typo
+  `keyBenefitsTitle` VARCHAR(255),
+  `useCaseCommercialTitleAr` VARCHAR(255), -- Corrected typo
+  `useCaseBackyardTitleAr` VARCHAR(255),  -- Corrected typo
+  `useCasesTitle` VARCHAR(255),  -- Corrected typo
+  `useCasesTitleAr` VARCHAR(255),  -- Corrected typo
   `published` BOOLEAN,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
