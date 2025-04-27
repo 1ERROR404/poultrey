@@ -5,7 +5,7 @@ var __export = (target, all) => {
 };
 
 // server/index.ts
-import express4 from "express";
+import express from "express";
 import path5 from "path";
 import fs4 from "fs";
 import cors from "cors";
@@ -5270,7 +5270,7 @@ function serveStatic(app2) {
 }
 
 // server/index.ts
-var app = express4();
+var app = express();
 
 // Add CORS configuration
 app.use(cors({
@@ -5278,14 +5278,14 @@ app.use(cors({
   credentials: true
 }));
 
-app.use(express4.json());
-app.use(express4.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 var publicDir = path5.join(process.cwd(), "public");
 var uploadsDir2 = path5.join(publicDir, "uploads");
 if (!fs4.existsSync(uploadsDir2)) {
   fs4.mkdirSync(uploadsDir2, { recursive: true });
 }
-app.use(express4.static(publicDir));
+app.use(express.static(publicDir));
 console.log("Serving static files from:", publicDir);
 console.log("Upload directory:", uploadsDir2);
 app.use((req, res, next) => {
