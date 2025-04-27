@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "start": "NODE_ENV=production node index.js",
-    "build": "vite build",
+    "build": "echo 'No build required for backend'",
     "dev": "vite"
   },
   "dependencies": {
