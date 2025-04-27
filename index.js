@@ -8,6 +8,7 @@ var __export = (target, all) => {
 import express4 from "express";
 import path5 from "path";
 import fs4 from "fs";
+import cors from "cors";
 
 // server/routes.ts
 import { createServer } from "http";
@@ -5270,6 +5271,13 @@ function serveStatic(app2) {
 
 // server/index.ts
 var app = express4();
+
+// Add CORS configuration
+app.use(cors({
+  origin: 'https://poultrygear.com',
+  credentials: true
+}));
+
 app.use(express4.json());
 app.use(express4.urlencoded({ extended: false }));
 var publicDir = path5.join(process.cwd(), "public");
